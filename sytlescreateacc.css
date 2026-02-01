@@ -26,14 +26,14 @@ html{
 
 
 body {
-    background-color: #202020;
+    background-color: #000000;
     color: #ffffff;
     margin: 0px;
     min-height: 100vh;
-    background-image: url(pexels-chrisluengas-19676084.jpg);
+    background-image: url(bgdrop-login-signup.jpg);
     background-size: cover;
     background-position: right;
-    overflow: hidden;
+    
 
 
 }
@@ -47,15 +47,16 @@ h1{
 
     font-size: 2rem; 
     font-weight: 300;
-    text-transform: uppercase;
+    
 
 
 
 
     text-align: center;
-    background-color: #202020;
+    background-color: #000000;
     margin-left: 30px;
     margin-right: 30px;
+    margin-top: 30px;
 }
 
 h2{
@@ -68,13 +69,22 @@ p{
 }
 
 
+.navbar{
 
+    .navbar {
+    height: 60px;                
+    background-color: hsl(246, 91%, 5%);
+    display: flex;         
+    padding: 0 16px;
+}
+
+}
 .navbar ul{
-    list-style-type: none;
-    background-color: hsl(0, 0%, 25%);
-    padding: 0px;
-    margin: 0px;
-    overflow: hidden;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background-color: hsl(246, 91%, 5%);
 }
 
 .navbar a{
@@ -82,14 +92,31 @@ p{
     text-decoration: none;
     padding: 15px;
     display: block;
+    
+    
 }
 
 .navbar a:hover{
-    background-color: #121212;
+    background-color: #02455a;
 }
 
 .navbar li{
-    float: left;
+     height: 100%;
+}
+
+
+.logo {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    .logo img {
+    max-height: 80%;   
+    width: auto;
+    display: block;
+}
 }
 
 .gif{
@@ -104,16 +131,27 @@ p{
 }
 
 .wrapper{
-    box-sizing: border-box;
     
-   
+
+    max-width: 420px;
+    margin: 80px auto;
+    border-radius: 16px;
+
+
     align-items: center;
     text-align: center;
     justify-content: center;
-    background-color: #202020;
-    margin-left: 30px;
-    margin-right: 30px;
+    background-color: #000000;
+    box-shadow: 0 0 0 2px white;
+    
 
+}
+
+ 
+
+
+.wrapper h1{
+    margin-top: 30px;
 }
 
 
@@ -162,4 +200,23 @@ form button{
     border-radius: 1000px; 
     padding: .85em 4em; 
     background-color: darkslategrey;
+    cursor: pointer;
+}
+
+
+a{
+    text-decoration: none; 
+    color: rgb(29, 204, 66);
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+
+form div.error input{
+    border-color: crimson;
+}
+form div.error label{
+    border-color: crimson;
 }

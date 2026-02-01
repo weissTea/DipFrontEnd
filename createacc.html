@@ -6,22 +6,27 @@
     <title>Adaptify.at/register</title>
 
     <link rel="stylesheet" href="sytlescreateacc.css">
+    <script type="text/javascript" src="validation.js" defer></script>
+
 </head>
 <body>
 
-    <nav class="navbar">
+      <nav class="navbar">
         <ul>
+            <li>
+                <a href="index.html" class="logo">
+                       <img src="darkmodelogo.png" height="50px" >
+                </a>
+            </li>
             <li><a href="index.html">Startseite</a></li>
             <li><a href="mycourses.html">Meine Kurse</a></li>
             <li><a href="discovercourses.html">Kurse entdecken</a></li>
             <li><a href="profile.html">Profil</a></li>
             <li><a href="mydata.html">Meine Daten</a></li>
             <li><a href="settings.html">Einstellungen</a></li>
-            <li><a href="createacc.html">Konto anlegen</a></li>
-            <li><a href="logout.html">Logout</a></li>
+            <li><a href="createacc.html">SignUp</a></li>
             <li><a href="login.html">Login</a></li>
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+            <li><a href="logout.html">Logout</a></li>
             
 
         </ul>
@@ -36,32 +41,34 @@
     
 
     <div class="wrapper">
-        <h1>Neuen Account anlegen:</h1>
-        <h2>SignUp</h2>
-        <form>
+        <h1>SignUp</h1>
+        
+        <p id="error-messages"></p>
+
+        <form id="form">
             <div>
                 <label for="username-input">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
                 </label>
-                <input required type="text" name="username" id="username-input" placeholder="username">
+                <input  type="text" name="username" id="username-input" placeholder="username">
             </div>
             <div>
                 <label for="email-input">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280 320-200v-80L480-520 160-720v80l320 200Z"/></svg>
                 </label>
-                <input required type="email" name="email" id="email-input" placeholder="email">
+                <input  type="email" name="email" id="email-input" placeholder="email">
             </div>
             <div>
                 <label for="password-input">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm240-200q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80Z"/></svg>
                 </label>
-                <input required type="password" name="password" id="password-input" placeholder="passwort">
+                <input  type="password" name="password" id="password-input" placeholder="passwort">
             </div>
             <div>
                 <label for="repeat-password-input">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M440-200h80v-120h120v-80H520v-120h-80v120H320v80h120v120ZM240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm120-560h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80Z"/></svg>
                 </label>
-                <input required type="password" name="repeat-password" id="repeat-password-input" placeholder="passwort wiederholen">
+                <input  type="password" name="repeat-password" id="repeat-password-input" placeholder="passwort wiederholen">
             </div>
             <button type="submit">Account erstellen</button>
         </form>
@@ -69,6 +76,6 @@
     </div>
 
 
-    <script href="srcipt.js"></script>
+  
 </body>
 </html>

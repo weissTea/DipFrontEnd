@@ -30,10 +30,10 @@ body {
     color: #ffffff;
     margin: 0px;
     min-height: 100vh;
-    background-image: url(pexels-chrisluengas-19676084.jpg);
+    background-image: url(bgdrop-all.jpg);
     background-size: cover;
     background-position: right;
-    overflow: hidden;
+    
 
 
 }
@@ -50,12 +50,22 @@ h1{
     margin-right: 30px;
 }
 
+.navbar{
+
+    .navbar {
+    height: 60px;                
+    background-color: hsl(246, 91%, 5%);
+    display: flex;         
+    padding: 0 16px;
+}
+
+}
 .navbar ul{
-    list-style-type: none;
-    background-color: hsl(0, 0%, 25%);
-    padding: 0px;
-    margin: 0px;
-    overflow: hidden;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background-color: hsl(246, 91%, 5%);
 }
 
 .navbar a{
@@ -63,15 +73,33 @@ h1{
     text-decoration: none;
     padding: 15px;
     display: block;
+    
+    
 }
 
 .navbar a:hover{
-    background-color: #121212;
+    background-color: #02455a;
 }
 
 .navbar li{
-    float: left;
+     height: 100%;
 }
+
+
+.logo {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    .logo img {
+    max-height: 80%;   
+    width: auto;
+    display: block;
+}
+}
+
 
 
 
