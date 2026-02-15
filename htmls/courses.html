@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="../css/style.css">
+    <title>BASE_TEMP</title>
+    
+</head>
+<body>
+
+    <div id="navbar"></div>
+    <script src="../scripts/navbar.js" defer></script>
+
+
+    <div class="leaves-container"></div>
+    <script src="../scripts/fallenleaves.js" defer></script>
+
+
+    <div class="frame">
+    <div class="layout">
+
+      <div class="left">
+        <h1 class="title">Meine Kurse</h1>
+        <p></p>
+
+        <section class="courses">
+          <a class="courseLink" href="mathe.html">
+            <article class="course mathe">
+              <h3>Mathe</h3>
+              <p>Kapitel & Übungen</p>
+            </article>
+          </a>
+
+          <a class="courseLink" href="deutsch.html">
+            <article class="course deutsch">
+              <h3>Deutsch</h3>
+              <p>Texte & Schreiben</p>
+            </article>
+          </a>
+
+          <a class="courseLink" href="englisch.html">
+            <article class="course englisch">
+              <h3>Englisch</h3>
+              <p>Vokabeln & Listening</p>
+            </article>
+          </a>
+        </section>
+      </div>
+
+      <!-- RIGHT SAFE AREA (Dropdown lives here) -->
+      <div class="right">
+        <aside class="menuBox" id="menuBox">
+          <div class="menuInner">
+            <button class="menuToggle" id="menuToggle" aria-haspopup="true" aria-expanded="false">≡</button>
+
+            <nav class="menuList" id="menuList" aria-label="Menü">
+              <a class="kurse-entdecken" href="#">Kurse entdecken</a>
+              <a class="profile" href="#">Profile</a>
+              <a class="meine-daten" href="#">Meine Daten</a>
+              <a class="einstellungen" href="#">Einstellungen</a>
+              <a class="logout" href="#">Logout</a>
+            </nav>
+          </div>
+        </aside>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

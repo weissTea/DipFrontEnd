@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meine Daten</title>
+
+<style>
+
+:root{
+  --bg:#070a12;
+  --ink:#eaf2ff;
+  --muted:rgba(234,242,255,.72);
+  --border:rgba(255,255,255,.14);
+  --radius:18px;
+
+  --neon-green: rgba(0,255,170,.75);
+  --neon-red: rgba(255,110,170,.75);
+  --neon-blue: rgba(80,150,255,.75);
+  --neon-purple: rgba(200,120,255,.85);
+  --neon-amber: rgba(255,190,90,.78);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink);
+
+  background:
+    radial-gradient(900px 520px at 15% 10%, rgba(80,150,255,.12), transparent 60%),
+    radial-gradient(850px 500px at 85% 20%, rgba(0,255,170,.10), transparent 60%),
+    radial-gradient(900px 600px at 45% 95%, rgba(255,60,120,.10), transparent 60%),
+    var(--bg);
+
+  min-height:100vh;
+  display:grid;
+  place-items:start center;
+  padding:22px 12px;
+}
+
+.frame{
+  width:min(900px,100%);
+  padding:22px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:18px;
+  background:rgba(255,255,255,.02);
+  box-shadow:0 18px 50px rgba(0,0,0,.7);
+  position:relative;
+}
+
+h1{
+  margin:0 0 20px 0;
+  font-size:42px;
+  font-weight:950;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.06),
+    rgba(255,255,255,.02)
+  );
+  padding:18px;
+  margin-bottom:18px;
+  box-shadow:0 14px 30px rgba(0,0,0,.45);
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px;
+  border-top:1px solid rgba(255,255,255,.10);
+}
+
+.row:first-child{
+  border-top:none;
+}
+
+.label{
+  font-weight:900;
+}
+
+.value{
+  color:var(--muted);
+  font-weight:700;
+}
+
+.input{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:10px;
+  padding:8px 10px;
+  color:white;
+}
+
+.btn{
+  margin-top:14px;
+  border:1px solid rgba(0,255,170,.35);
+  background:rgba(0,255,170,.08);
+  color:white;
+  padding:10px 14px;
+  border-radius:12px;
+  font-weight:900;
+  cursor:pointer;
+  transition:.15s;
+}
+
+.btn:hover{
+  background:rgba(0,255,170,.18);
+}
+
+
+
+
+
+
+
+/* DROPDOWN MENU */
+
+details.menu{
+  position:absolute;
+  top:18px;
+  right:18px;
+  z-index:10;
+}
+
+summary.menu__title{
+  list-style:none;
+  width:56px;
+  height:56px;
+  border-radius:14px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.16);
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  font-size:22px;
+  box-shadow:0 10px 24px rgba(0,0,0,.35);
+  transition:.15s;
+}
+
+summary.menu__title:hover{
+  transform:translateY(-1px);
+}
+
+summary.menu__title::-webkit-details-marker{
+  display:none;
+}
+
+.menuList{
+  margin-top:10px;
+  width:260px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:16px;
+  overflow:hidden;
+  background:rgba(18,24,38,.78);
+  backdrop-filter:blur(10px);
+
+  box-shadow:0 18px 50px rgba(0,0,0,.65);
+
+  max-height:0;
+  opacity:0;
+  transform:translateY(-10px) scale(.98);
+  pointer-events:none;
+
+  transition:.3s;
+}
+
+details.menu[open] .menuList{
+  max-height:500px;
+  opacity:1;
+  transform:translateY(0) scale(1);
+  pointer-events:auto;
+}
+
+.menuList a{
+  display:block;
+  padding:16px;
+  text-decoration:none;
+  color:var(--ink);
+  font-weight:900;
+  border-top:1px solid rgba(255,255,255,.10);
+}
+
+.menuList a:hover{
+  background:rgba(255,255,255,.06);
+}
+
+.menuList a.meine-kurse{
+  box-shadow: inset 6px 0 0 var(--neon-green);
+}
+
+.menuList a.kurse-entdecken{
+  box-shadow: inset 6px 0 0 var(--neon-purple);
+}
+
+.menuList a.meine-daten{
+  box-shadow: inset 6px 0 0 var(--neon-red);
+}
+
+.menuList a.einstellungen{
+  box-shadow: inset 6px 0 0 var(--neon-blue);
+}
+
+.menuList a.logout{
+  box-shadow: inset 6px 0 0 var(--neon-amber);
+}
+
+</style>
+</head>
+
+
+
+<body>
+
+<details class="menu">
+  <summary class="menu__title">≡</summary>
+
+  <nav class="menuList">
+
+    <a class="meine-kurse" href="meineKurse.html">
+      Meine Kurse
+    </a>
+
+    <a class="kurse-entdecken" href="kurseEntdecken.html">
+      Kurse entdecken
+    </a>
+
+    <a class="meine-daten" href="meineDaten.html">
+      Meine Daten
+    </a>
+
+    <a class="einstellungen" href="einstellungen.html">
+      Einstellungen
+    </a>
+
+    <a class="logout" href="logout.html">
+      Logout
+    </a>
+
+  </nav>
+</details>
+
+
+
+<div class="frame">
+
+<h1>Meine Daten</h1>
+
+
+<div class="card">
+
+<div class="row">
+<div class="label">Benutzername</div>
+<div class="value">MaxMustermann</div>
+</div>
+
+<div class="row">
+<div class="label">E-Mail</div>
+<div class="value">max@mail.com</div>
+</div>
+
+<div class="row">
+<div class="label">Account erstellt</div>
+<div class="value">12. März 2026</div>
+</div>
+
+<div class="row">
+<div class="label">Level</div>
+<div class="value">Level 3</div>
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<div class="row">
+<div class="label">Benutzername ändern</div>
+<input class="input" placeholder="Neuer Name">
+</div>
+
+<div class="row">
+<div class="label">E-Mail ändern</div>
+<input class="input" placeholder="Neue Mail">
+</div>
+
+<div class="row">
+<div class="label">Passwort ändern</div>
+<input class="input" type="password" placeholder="Neues Passwort">
+</div>
+
+<button class="btn">Speichern</button>
+
+</div>
+
+
+</div>
+
+</body>
+</html>

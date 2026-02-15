@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="../css/style.css">
+    <title>BASE_TEMP</title>
+</head>
+<body>
+
+ 
+
+    <script src="../scripts/profile.js" defer></script>
+
+    <div id="navbar"></div>
+    <script src="../scripts/navbar.js" defer></script>
+
+
+    <div class="leaves-container"></div>
+    <script src="../scripts/fallenleaves.js" defer></script>
+
+   <div class="frame">
+
+        <div class="profile-picture-section">
+
+            <h3>Derzeitiges ProfilBild: </h3>
+
+            <img id="profile-preview" src="../images/duck.png" >
+            <br>
+
+            <input type="file" id="profile-upload" accept = "image/*">
+            <button onclick="reloadPage()">Profilbild ändern</button>
+
+
+        </div>
+
+        
+
+
+
+    <div class="frame">
+        <div class="current-profile-name">
+            <h3>gespeicherte Daten: </h3>
+
+            <p>Username: <span id="saved-name">Kein Username gespeichert</span></p>
+            <p>Email: <span id="saved-email">Keine Email gespeichert</span></p>
+
+
+            <h3>gespeicherte Daten mit SignUp: </h3>
+
+            <p>Username: <span id="profile-name">Kein Username gespeichert</span></p>
+            <p>Email: <span id="profile-email">Keine Email gespeichert</span></p>
+
+        </div> 
+        <div class="change-name">
+             <h3>UserNamen ändern: </h3>
+            <input type="text" id="name-input" placeholder="Neuen Anzeigenamen eingeben">
+            <button onclick="changeName()">ändern</button>
+        </div>
+
+
+        <div class="change-email">
+            <h3>E-Mail ändern: </h3>
+            <input type="email" id="email-input" placeholder="Neue Email angeben">
+            <div id="email-warning" class="warning-message"></div>
+           
+            <button onclick="changeEmail()">ändern</button>
+        </div>
+    </div>
+       
+   
+
+    </div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meine Kurse</title>
+
+  <style>
+    :root{
+      --bg:#070a12;
+      --ink:#eaf2ff;
+      --muted:rgba(234,242,255,.72);
+      --border:rgba(255,255,255,.14);
+      --radius:18px;
+
+      --neon-green: rgba(0,255,170,.75);
+      --neon-red:   rgba(255,60,120,.75);
+      --neon-blue:  rgba(80,150,255,.78);
+
+      --menu-safe: 320px;
+      --shadow: 0 18px 50px rgba(0,0,0,.7);
+      --shadow-soft: 0 14px 30px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(900px 520px at 15% 10%, rgba(80,150,255,.12), transparent 60%),
+        radial-gradient(850px 500px at 85% 20%, rgba(0,255,170,.10), transparent 60%),
+        radial-gradient(900px 600px at 45% 95%, rgba(255,60,120,.10), transparent 60%),
+        var(--bg);
+      min-height:100vh;
+      display:grid;
+      place-items:start center;
+      padding: 22px 12px;
+    }
+
+    .frame{
+      width: min(1400px, 100%);
+      min-height: 620px;
+      padding: 22px;
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:18px;
+      background:rgba(255,255,255,.02);
+      box-shadow:var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns: 1fr var(--menu-safe);
+      gap: 22px;
+      align-items:start;
+    }
+
+    .left{ padding: 4px 6px; }
+
+    .topRow{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 14px;
+      flex-wrap:wrap;
+    }
+
+    .title{
+      font-size:clamp(30px,4vw,52px);
+      font-weight:950;
+      margin:0;
+      line-height:1.05;
+    }
+    .subtitle{
+      margin: 8px 0 0;
+      color:var(--muted);
+      max-width: 70ch;
+    }
+
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.04);
+      color:var(--ink);
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 900;
+      cursor:pointer;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.06); }
+
+    .toolbar{
+      margin-top: 16px;
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .input, .select{
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(18,24,38,.55);
+      color:var(--ink);
+      padding: 10px 12px;
+      border-radius: 12px;
+      outline:none;
+      min-width: 220px;
+    }
+    .select{ min-width: 180px; }
+
+    .cards{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-content:start;
+    }
+
+    .card{
+      border:1px solid rgba(92, 74, 74, 0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(243, 20, 20, 0.02));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      overflow:hidden;
+      position:relative;
+      padding: 18px;
+      min-height: 160px;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-55%;
+      background: radial-gradient(circle at 35% 35%, var(--glow, rgba(255,255,255,.16)), transparent 55%);
+      opacity: 0;
+      transition: opacity .18s ease;
+      pointer-events:none;
+      filter: blur(3px);
+    }
+
+    .card:hover{
+      transform: scale(1.02);
+      border-color: rgba(255,255,255,.22);
+      box-shadow: 0 22px 60px rgba(0,0,0,.72);
+    }
+    .card:hover::before{ opacity:1; }
+
+    .cardHeader{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 10px;
+    }
+
+    .cardTitle{
+      margin:0;
+      font-size: 22px;
+      font-weight: 950;
+    }
+    .cardMeta{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    .pill{
+      font-weight: 900;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.04);
+      white-space:nowrap;
+    }
+
+    .progressWrap{
+      margin-top: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
+    .progressBar{
+      flex:1;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .progressFill{
+      height:100%;
+      width: var(--p, 40%);
+      background: var(--glow, rgba(255,255,255,.35));
+      box-shadow: 0 0 18px 2px var(--glow, rgba(255,255,255,.22));
+    }
+    .progressText{
+      color: var(--muted);
+      font-weight: 900;
+      font-size: 12px;
+      min-width: 56px;
+      text-align:right;
+    }
+
+    .cardActions{
+      margin-top: 14px;
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+
+    .card.mathe{ --glow: var(--neon-green); }
+    .card.deutsch{ --glow: var(--neon-red); }
+    .card.englisch{ --glow: var(--neon-blue); }
+
+    .right{ position: relative; min-height: 280px; }
+
+    details.menu{
+      position: sticky;
+      top: 16px;
+      width: 100%;
+      display:block;
+    }
+
+    summary.menu__title{
+      list-style:none;
+      width:56px;
+      height:56px;
+      margin-left:auto;
+      border-radius:14px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.16);
+      color:var(--ink);
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      font-size:22px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      user-select:none;
+      transition: transform .12s ease, border-color .12s ease;
+    }
+    summary.menu__title:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.22);
+    }
+    summary.menu__title::-webkit-details-marker{display:none}
+
+    .menuList{
+      margin-top:10px;
+      width:100%;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:16px;
+      overflow:hidden;
+      background: rgba(18,24,38,.78);
+      backdrop-filter: blur(10px);
+      box-shadow:0 18px 50px rgba(0,0,0,.65);
+
+      max-height:0;
+      opacity:0;
+      transform: translateY(-10px) scale(.98);
+      pointer-events:none;
+      transition: max-height .35s ease, opacity .18s ease, transform .18s ease;
+    }
+    details.menu[open] .menuList{
+      max-height: 420px;
+      opacity:1;
+      transform: translateY(0) scale(1);
+      pointer-events:auto;
+    }
+
+    .menuList a{
+      display:block;
+      text-decoration:none;
+      color:var(--ink);
+      padding:16px 16px;
+      font-weight:900;
+      border-top:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      transition: background .12s ease, transform .12s ease;
+    }
+    .menuList a:first-child{ border-top:0; }
+    .menuList a:hover{ background: rgba(255,255,255,.06); transform: translateX(2px); }
+
+    .menuList a.kurse-entdecken{ box-shadow: inset 6px 0 0 rgba(200,120,255,.85); }
+    .menuList a.meine-kurse{     box-shadow: inset 6px 0 0 rgba(0,255,170,.75); }
+    .menuList a.meine-daten{     box-shadow: inset 6px 0 0 rgba(255,110,170,.75); }
+    .menuList a.einstellungen{   box-shadow: inset 6px 0 0 rgba(80,150,255,.75); }
+    .menuList a.logout{          box-shadow: inset 6px 0 0 rgba(255,190,90,.78); }
+
+    @media (max-width: 980px){
+      :root{ --menu-safe: 0px; }
+      .layout{ grid-template-columns: 1fr; }
+      .right{ position:absolute; top:18px; right:18px; width:260px; min-height:0; }
+      .cards{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <div class="layout">
+
+      <div class="left">
+        <div class="topRow">
+          <div>
+            <h1 class="title">Meine Kurse</h1>
+            <p class="subtitle">Hier siehst du deine aktiven Kurse, Fortschritt und kannst direkt weitermachen.</p>
+          </div>
+          <a class="btn" href="MeineKurse.html">↻ Aktualisieren</a>
+        </div>
+
+        <div class="toolbar">
+          <input class="input" type="text" placeholder="Kurs suchen… (z.B. Mathe)" />
+          <select class="select">
+            <option>Sortieren: Letzte Aktivität</option>
+            <option>Sortieren: Fortschritt (hoch)</option>
+            <option>Sortieren: Fortschritt (niedrig)</option>
+            <option>Sortieren: Name (A–Z)</option>
+          </select>
+          <a class="btn" href="KurseEntdecken.html">＋ Kurs hinzufügen</a>
+        </div>
+
+        <section class="cards">
+          <div class="card mathe">
+            <div class="cardHeader">
+              <div>
+                <h3 class="cardTitle">Mathe</h3>
+                <p class="cardMeta">Zuletzt: heute • Nächstes: Chapter 2 – Subtrahieren</p>
+              </div>
+              <span class="pill">Aktiv</span>
+            </div>
+
+            <div class="progressWrap">
+              <div class="progressBar"><div class="progressFill" style="--p: 42%"></div></div>
+              <div class="progressText">42%</div>
+            </div>
+
+            <div class="cardActions">
+              <a class="btn" href="mathe.html">▶ Weiterlernen</a>
+              <a class="btn" href="MeineDaten.html">⬇ Dateien</a>
+            </div>
+          </div>
+
+          <div class="card deutsch">
+            <div class="cardHeader">
+              <div>
+                <h3 class="cardTitle">Deutsch</h3>
+                <p class="cardMeta">Zuletzt: gestern • Nächstes: Chapter 1 – Rechtschreibung</p>
+              </div>
+              <span class="pill">Aktiv</span>
+            </div>
+
+            <div class="progressWrap">
+              <div class="progressBar"><div class="progressFill" style="--p: 18%"></div></div>
+              <div class="progressText">18%</div>
+            </div>
+
+            <div class="cardActions">
+              <a class="btn" href="deutsch.html">▶ Weiterlernen</a>
+              <a class="btn" href="MeineDaten.html">⬇ Dateien</a>
+            </div>
+          </div>
+
+          <div class="card englisch">
+            <div class="cardHeader">
+              <div>
+                <h3 class="cardTitle">Englisch</h3>
+                <p class="cardMeta">Zuletzt: vor 3 Tagen • Nächstes: Chapter 1 – Vocabulary</p>
+              </div>
+              <span class="pill">Aktiv</span>
+            </div>
+
+            <div class="progressWrap">
+              <div class="progressBar"><div class="progressFill" style="--p: 9%"></div></div>
+              <div class="progressText">9%</div>
+            </div>
+
+            <div class="cardActions">
+              <a class="btn" href="englisch.html">▶ Weiterlernen</a>
+              <a class="btn" href="MeineDaten.html">⬇ Dateien</a>
+            </div>
+          </div>
+
+          <div class="card" style="--glow: rgba(255,255,255,.18);">
+            <div class="cardHeader">
+              <div>
+                <h3 class="cardTitle">Neue Ziele</h3>
+                <p class="cardMeta">Mini-Plan: 20 Minuten pro Tag, 1 Kapitel pro Woche.</p>
+              </div>
+              <span class="pill">Tipp</span>
+            </div>
+
+            <div class="cardActions">
+              <a class="btn" href="KurseEntdecken.html">🔎 Kurse entdecken</a>
+              <a class="btn" href="#">🧠 Lernplan (später)</a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="right">
+        <details class="menu">
+          <summary class="menu__title" aria-label="Menü">≡</summary>
+          <nav class="menuList" aria-label="Menü">
+            <a class="meine-kurse" href="meineKurse.html">Meine Kurse</a>
+            <a class="kurse-entdecken" href="kurseEntdecken.html">Kurse entdecken</a>
+            <a class="meine-daten" href="meineDaten.html">Meine Daten</a>
+            <a class="einstellungen" href="einstellungen.html">Einstellungen</a>
+            <a class="logout" href="logout.html">Logout</a>
+          </nav>
+          </nav>
+        </details>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
